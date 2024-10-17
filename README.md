@@ -44,4 +44,4 @@ You can find here our project's ![Quadchart](design/QuadChart.pptx)
 
 
 ## Video of our proposal
-Video proposal link : ![Group4](https://drive.google.com/file/d/1rcB-cPHnB-c9aREbyvtHlIwMpFuqJT5B/view?usp=sharing)
+Video proposal link : ![Group4](design/video_proposal_group4.mp4)
