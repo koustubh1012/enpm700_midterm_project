@@ -1,15 +1,26 @@
+#include "humandetector.hpp"
 #include <gtest/gtest.h>
-#include "lib1.hpp"
-#include "lib2.hpp"
 
-TEST(dummy_test, this_should_pass) {
-  EXPECT_EQ(1, 1);
+TEST(HUMAN_DETECTION, NO_HUMAN_TEST){
+  HumanDetector test_object;
+  cv::Mat frame = imread("no_human.jpg", cv::IMREAD_COLOR);
+  std::unordered_map<int, std::vector<int>> detectedhumans;
+  detectedhumans = test_object.detectHuman(frame);
+  ASSERT_TRUE(detectedhumans.empty());
 }
 
-TEST(dummy_test, this_should_pass_too) {
-  EXPECT_EQ(my_function1(3), 3);
+TEST(HUMAN_DETECTION, ONE_HUMAN_TEST){
+  HumanDetector test_object;
+  cv::Mat frame = imread("human.jpg", cv::IMREAD_COLOR);
+  std::unordered_map<int, std::vector<int>> detectedhumans;
+  detectedhumans = test_object.detectHuman(frame);
+  ASSERT_EQ(detectedhumans.size(), 1);
 }
 
-TEST(dummy_test, this_will_fail) {
-  EXPECT_EQ(my_function2(3.2), 3.2);
+TEST(HUMAN_DETECTION, TWO_HUMAN_TEST){
+  HumanDetector test_object;
+  cv::Mat frame = imread("human.jpg", cv::IMREAD_COLOR);
+  std::unordered_map<int, std::vector<int>> detectedhumans;
+  detectedhumans = test_object.detectHuman(frame);
+  ASSERT_EQ(detectedhumans.size(), 2);
 }
