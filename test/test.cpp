@@ -19,7 +19,7 @@ TEST(HUMAN_DETECTION, ONE_HUMAN_TEST){
 
 TEST(HUMAN_DETECTION, TWO_HUMAN_TEST){
   HumanDetector test_object;
-  cv::Mat frame = imread("human.jpg", cv::IMREAD_COLOR);
+  cv::Mat frame = imread("two_human.jpg", cv::IMREAD_COLOR);
   std::unordered_map<int, std::vector<int>> detectedhumans;
   detectedhumans = test_object.detectHuman(frame);
   ASSERT_EQ(detectedhumans.size(), 2);
