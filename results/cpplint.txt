@@ -1,0 +1,8 @@
+koustubh@kstb:~/Documents/ENPM700/enpm700_midterm_project$ cpplint --filter="-legal/copyright" $( find . -name *.cpp | grep -v "/build/" )
+Done processing ./app/main.cpp
+./src/DepthMapApp.cpp:45:  Using C-style cast.  Use reinterpret_cast<void *>(...) instead  [readability/casting] [4]
+Done processing ./src/DepthMapApp.cpp
+Done processing ./src/humandetector.cpp
+Done processing ./test/main.cpp
+Done processing ./test/test.cpp
+Total errors found: 1
