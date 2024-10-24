@@ -10,6 +10,11 @@ add_library (humandetector
   ../src/humandetector.cpp
   )
 
+add_library (depthmap
+  # list of cpp source files:
+  ../src/DepthMapApp.cpp
+  )
+
 # Indicate what directories should be added to the include file search
 # path when using this library.
 target_include_directories(humandetector PUBLIC
@@ -17,8 +22,17 @@ target_include_directories(humandetector PUBLIC
   .
   )
 
-  target_link_libraries(humandetector PUBLIC
-  # list of libraries
+target_include_directories(depthmap PUBLIC
+  # list of directories:
+  .
+  )
 
+target_link_libraries(humandetector PUBLIC
+  # list of libraries
+  ${OpenCV_LIBS}
+  )
+
+target_link_libraries(depthmap PUBLIC
+  # list of libraries
   ${OpenCV_LIBS}
   )
