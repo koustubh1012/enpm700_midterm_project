@@ -26,7 +26,7 @@ Acme Robotics is launching a brand new robotics-based product next year but thei
 Our task is to design a perception module of their robotics-based components using high-quality software engineering practices so their team can take our deliverable, finish development and integrate it into the product.
 
 ## Initial proposal
-You can find document of our intial proposal here : ![Proposal_link](design/Phase0-Proposal.pdf)
+You can find document of our intial proposal here : [Proposal_link](design/Phase0-Proposal.pdf)
 
 ## Activity Diagram
 ![Activity_Diagram](design/images/activity_diagram.jpeg)
@@ -37,10 +37,10 @@ You can find document of our intial proposal here : ![Proposal_link](design/Phas
 
 
 ## Initial Product Backlog
-You can find here our spreadsheet for ![Product_Backlog](https://docs.google.com/spreadsheets/d/1fh9gBtK0hcLDP9B47O9Ribjl_y3yS_IEFFMDYh72blE/edit?gid=0#gid=0)
+You can find here our spreadsheet for [Product_Backlog](https://docs.google.com/spreadsheets/d/1fh9gBtK0hcLDP9B47O9Ribjl_y3yS_IEFFMDYh72blE/edit?gid=0#gid=0)
 
 ## Quadchart
-You can find here our project's ![Quadchart](design/QuadChart.pptx)
+You can find here our project's [Quadchart](design/QuadChart.pptx)
 
 
 ## Video of our proposal
