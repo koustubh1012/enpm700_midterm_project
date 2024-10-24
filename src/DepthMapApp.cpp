@@ -11,7 +11,7 @@ void Preprocessor::preprocess(const cv::Mat &frame,
   cv::Mat resized;
   cv::resize(frame, resized, cv::Size(input_width, input_height));
   resized.convertTo(resized, CV_32F, 1.0 / 255.0);   // Normalize
-  cv::cvtColor(resized, resized, cv::COLOR_BGR2RGB); // Convert to RGB
+  cv::cvtColor(resized, resized, cv::COLOR_BGR2RGB);  // Convert to RGB
 
   input_tensor = cv::dnn::blobFromImage(resized);
 }
@@ -34,7 +34,6 @@ void Preprocessor::preprocess(const cv::Mat &frame,
 
 // Run inference on the input tensor
 std::vector<float> MidasModel::infer(const cv::Mat &input_tensor) const {
-
   // Extract the output
   std::vector<float> X = {0, 1};
   return X;
@@ -45,7 +44,7 @@ cv::Mat Postprocessor::postprocess(const std::vector<float> &output, int rows,
                                    int cols) const {
   cv::Mat depth_map = cv::Mat(rows, cols, CV_32F, (void *)output.data());
   cv::normalize(depth_map, depth_map, 0, 1,
-                cv::NORM_MINMAX); // Normalize between 0 and 1
+                cv::NORM_MINMAX);  // Normalize between 0 and 1
   return depth_map;
 }
 
@@ -88,7 +87,7 @@ void DepthMapApp::run() {
     cv::imshow("Webcam", frame);
 
     if (cv::waitKey(1) == 27)
-      break; // Stop if 'ESC' is pressed
+      break;  // Stop if 'ESC' is pressed
   }
 
   // Release the frames and close the windows

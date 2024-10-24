@@ -1,5 +1,5 @@
-#include "humandetector.hpp"
 #include <gtest/gtest.h>
+#include "humandetector.hpp"
 
 TEST(HUMAN_DETECTION, NO_HUMAN_TEST) {
   HumanDetector test_object;

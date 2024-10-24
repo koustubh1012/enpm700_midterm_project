@@ -13,7 +13,6 @@ int main() {
   }
   cv::Mat frame;
   while (cap.read(frame)) {
-
     detectedhumans = detector_object.detectHuman(frame);
     for (const auto &pair : detectedhumans) {
       std::cout << "Human ID: " << pair.first << " -> Bounding Box: ";
