@@ -86,7 +86,7 @@ void HumanDetector::postProcess(cv::Mat& frame,
 
     // Check if the detected class is a "person" (classId is 0 for "person" in
     // COCO dataset)
-    if (classIds[idx] == 0 || classIds[idx] == 3) {
+    if (classIds[idx] == 0) {
       rectangle(frame, box, cv::Scalar(0, 255, 0),
                 3);  // Green rectangle for humans
       putText(frame, label, cv::Point(box.x, box.y - 5), cv::FONT_HERSHEY_SIMPLEX, 1,
