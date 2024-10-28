@@ -14,7 +14,7 @@
 
 /**
  * 
- * @brief Class for calculating depth from disparity
+ * @brief Class for calculating depth from h
  * @authors: Swaraj M Rao, FNU Koustubh, Keyur Borad
  * @file DepthMapApp.hpp
  * @date 2024-20-10
@@ -25,10 +25,10 @@ class DepthCalculator {
   public:
 
     // Constructor for the DepthMapApp class
-    DepthCalculator(float focal_length, float baseline);
+    DepthCalculator(float focal_length, float rw_height);
     
-    // Function to calculate depth from disparity
-    float calculateDepth(float disparity) const;
+    // Function to calculate depth from h
+    float calculateDepth(float h) const;
     
     // Function to display depth on the frame
     void displayDepth(cv::Mat &frame, float depth, const cv::Rect &bounding_box) const;
@@ -38,8 +38,8 @@ class DepthCalculator {
     //Focal Length of Camera 
     float focal_length;
 
-    // Baseline of Camera
-    float baseline;
+    // rw_height of Camera
+    float rw_height;
 
 };
 

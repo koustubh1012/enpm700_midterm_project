@@ -5,18 +5,18 @@
 
 
 // Constructor for the DepthMapApp class
-DepthCalculator::DepthCalculator(float focal_length, float baseline) : focal_length(focal_length), baseline(baseline) {}
+DepthCalculator::DepthCalculator(float focal_length, float rw_height) : focal_length(focal_length), rw_height(rw_height) {}
 
-float DepthCalculator::calculateDepth(float disparity) const {
+float DepthCalculator::calculateDepth(float h) const {
 
-  // Check if disparity is less than or equal to zero, if so return -1.0f
-  if (disparity <= 0) {
-    std::cerr << "Error: Disparity must be greater than zero to calculate depth." << std::endl;
+  // Check if h is less than or equal to zero, if so return -1.0f
+  if (h <= 0) {
+    std::cerr << "Error: h must be greater than zero to calculate depth." << std::endl;
     return -1.0f;
     }
     
-    // Calculate the depth using the formula: Depth = (focal_length * baseline) / disparity
-    return (focal_length * baseline) / disparity;
+    // Calculate the depth using the formula: Depth = (focal_length * rw_height) / h
+    return (focal_length * rw_height) / h;
 
 }
 
