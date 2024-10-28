@@ -3,8 +3,8 @@
 ## Topic: Human Object detection and tracking using monocular camera
 
 # C++ Badges
-![CICD Workflow status](https://github.com/keyurborad5/enpm700_midterm_project/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg) 
-[![codecov](https://codecov.io/gh/keyurborad5/enpm700_midterm_project/branch/main/graph/badge.svg)](https://codecov.io/gh/keyurborad5/enpm700_midterm_project) 
+![CICD Workflow status](https://github.com/koustubh1012/enpm700_midterm_project/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg) 
+[![codecov](https://codecov.io/gh/koustubh1012/enpm700_midterm_project/branch/main/graph/badge.svg)](https://codecov.io/gh/keyurborad5/enpm700_midterm_project) 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
