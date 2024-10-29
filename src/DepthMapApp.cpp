@@ -1,96 +1,35 @@
+// Include the necessary header files and dependencies
 #include "DepthMapApp.hpp"
 #include <iostream>
+#include <opencv2/opencv.hpp> 
 
-// Set the input width and height as
-const int input_width = 384;
-const int input_height = 384;
 
-// Preprocessor class implementation
-void Preprocessor::preprocess(const cv::Mat &frame,
-                              cv::Mat &input_tensor) const {
-  cv::Mat resized;
-  cv::resize(frame, resized, cv::Size(input_width, input_height));
-  resized.convertTo(resized, CV_32F, 1.0 / 255.0);   // Normalize
-  cv::cvtColor(resized, resized, cv::COLOR_BGR2RGB);  // Convert to RGB
+// Constructor for the DepthMapApp class
+DepthCalculator::DepthCalculator(float focal_length, float rw_height) : focal_length(focal_length), rw_height(rw_height) {}
 
-  input_tensor = cv::dnn::blobFromImage(resized);
-}
+float DepthCalculator::calculateDepth(float h) const {
 
-//  MidasModel constructor
-// MidasModel::MidasModel(const std::string& model_path)
-//     : env(ORT_LOGGING_LEVEL_WARNING, "MidasDepthMap") {
-//     // Initialize session options
-//     session_options.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_EXTENDED);
-
-//     // Load model
-//     session = std::make_unique<Ort::Session>(env, model_path.c_str(),
-//     session_options);
-
-//     Ort::AllocatorWithDefaultOptions allocator;
-//     // Get input and output names
-//     input_name = session->GetInputNameAllocated(0, allocator).get();
-//     output_name = session->GetOutputNameAllocated(0, allocator).get();
-// }
-
-// Run inference on the input tensor
-std::vector<float> MidasModel::infer(const cv::Mat &input_tensor) const {
-  // Extract the output
-  std::vector<float> X = {0, 1};
-  return X;
-}
-
-// Postprocessor class implementation
-cv::Mat Postprocessor::postprocess(const std::vector<float> &output, int rows,
-                                   int cols) const {
-  cv::Mat depth_map = cv::Mat(rows, cols, CV_32F, (void *)output.data());
-  cv::normalize(depth_map, depth_map, 0, 1,
-                cv::NORM_MINMAX);  // Normalize between 0 and 1
-  return depth_map;
-}
-
-// DepthMapApp class implementation
-DepthMapApp::DepthMapApp(const std::string &model_path) : model(model_path) {}
-
-// Run the depth map generation application
-void DepthMapApp::run() {
-  // Open webcam for capturing frames
-  cv::VideoCapture cap(0);
-  if (!cap.isOpened()) {
-    std::cerr << "Error: Couldn't open webcam." << std::endl;
-    return;
-  }
-
-  // While loop to capture frames and run inference
-  while (true) {
-    cv::Mat frame;
-    cap >> frame;
-    if (frame.empty()) {
-      std::cerr << "Error: Blank frame grabbed." << std::endl;
-      break;
+  // Check if h is less than or equal to zero, if so return -1.0f
+  if (h <= 0) {
+    std::cerr << "Error: h must be greater than zero to calculate depth." << std::endl;
+    return -1.0f;
     }
+    
+    // Calculate the depth using the formula: Depth = (focal_length * rw_height) / h
+    return (focal_length * rw_height) / h;
 
-    // Preprocess the frame
-    cv::Mat input_tensor;
-    preprocessor.preprocess(frame, input_tensor);
+}
 
-    // Run inference
-    std::vector<float> output = model.infer(input_tensor);
-
-    // Postprocess to get the depth map
-    cv::Mat depth_map = postprocessor.postprocess(output, 384, 384);
-
-    // Resize depth map to match the input frame size
-    cv::resize(depth_map, depth_map, frame.size());
-
-    // Display depth map
-    cv::imshow("Depth Map", depth_map);
-    cv::imshow("Webcam", frame);
-
-    if (cv::waitKey(1) == 27)
-      break;  // Stop if 'ESC' is pressed
-  }
-
-  // Release the frames and close the windows
-  cap.release();
-  cv::destroyAllWindows();
+// Function to display depth on the frame
+void DepthCalculator::displayDepth(cv::Mat &frame, float depth, const cv::Rect &bounding_box) const {
+    
+    // Draw a rectangle around the object
+    cv::rectangle(frame, bounding_box, cv::Scalar(0, 255, 0), 2);
+    
+    // Display the depth on the frame
+    std::string depth_text = "Depth (Z): " + std::to_string(depth) + " meters";
+    
+    // Display the depth on the frame
+    cv::putText(frame, depth_text, cv::Point(100, 90), cv::FONT_HERSHEY_SIMPLEX, 0.6, cv::Scalar(255, 0, 0), 2);
+    // cv::imshow("Webcam", frame);
 }
