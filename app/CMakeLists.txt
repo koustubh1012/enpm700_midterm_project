@@ -21,6 +21,8 @@ target_include_directories(shell-app PUBLIC
 target_link_libraries(shell-app PUBLIC
   # list of libraries
   humandetector
+  depthmap
+  humanposeestimator
   ${OpenCV_LIBS}
   )
 
