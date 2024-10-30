@@ -99,7 +99,7 @@ add_subdirectory(include)
 doxygen_add_docs(docs           # target name
   # List of files or directories
   ${PROJECT_SOURCE_DIR}/app
-  ${PROJECT_SOURCE_DIR}/libs
+  # ${PROJECT_SOURCE_DIR}/libs
   ${PROJECT_SOURCE_DIR}/include
   )
 
@@ -108,7 +108,7 @@ if(WANT_COVERAGE)
   # unit test coverage:
   setup_target_for_coverage_lcov ( # use lcov to generate coverage report
     NAME test_coverage          # target name
-    #EXECUTABLE ctest || true    # what to run insdie the build directory?
+    EXECUTABLE ctest || true    # what to run insdie the build directory?
                                  #   '|| true' --> continue coverage even if ctest failed
     EXECUTABLE ctest     # what to run insdie the build directory?
     EXCLUDE
