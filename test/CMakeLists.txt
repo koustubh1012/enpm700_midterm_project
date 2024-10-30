@@ -18,6 +18,7 @@ target_link_libraries(cpp-test PUBLIC
   # list of libraries:
   gtest
   humandetector
+  humanposeestimator
   )
 
 # Enable CMake’s test runner to discover the tests included in the
