@@ -57,28 +57,34 @@ class HumanDetector {
    */
   std::unordered_map<int, std::vector<int>> detectHuman(cv::Mat frame);
   /**
-   * @brief Post Processor to draw a bounding box and put text on the detected human also done non-Max suppression to avoid dublicacy detection of same human
-   * 
-   * @param frame 
-   * @param outs 
-   * @param net 
-   * @param classNames 
+   * @brief Post Processor to draw a bounding box and put text on the detected
+   * human also done non-Max suppression to avoid dublicacy detection of same
+   * human
+   *
+   * @param frame
+   * @param outs
+   * @param net
+   * @param classNames
    */
   void postProcess(cv::Mat& frame, const std::vector<cv::Mat>& outs,
                    cv::dnn::Net& net,
                    const std::vector<std::string>& classNames);
 
  private:
-   /*!< String Variable to load the model configuration file from the config folder */
+  /*!< String Variable to load the model configuration file from the config
+   * folder */
   std::string modelConfiguration;
-   /*!< String  Variable to load the model weights  from the config folder */
+  /*!< String  Variable to load the model weights  from the config folder */
   std::string modelWeights;
-   /*!< String Variable named classNamesFile to load the class names from config folder */
+  /*!< String Variable named classNamesFile to load the class names from config
+   * folder */
   std::string classNamesFile;
-   /*!< A vector of string to convert the cvs file of class names to a vector for labelling the detected object */
+  /*!< A vector of string to convert the cvs file of class names to a vector for
+   * labelling the detected object */
   std::vector<std::string> classNames;
-   /*!< OPENCV class of defining DNN neuaral net for parsing the frame */
+  /*!< OPENCV class of defining DNN neuaral net for parsing the frame */
   cv::dnn::Net net;
-   /*!< unordered_map of integer and Vactor that is sent as a return of the detected human class*/
+  /*!< unordered_map of integer and Vactor that is sent as a return of the
+   * detected human class*/
   std::unordered_map<int, std::vector<int>> detectedhumans;
 };

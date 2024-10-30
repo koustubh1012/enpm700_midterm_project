@@ -32,7 +32,7 @@ std::unordered_map<int, std::vector<int>> HumanDetector::detectHuman(
   for (auto& mat : outs) {
     mat.release();  // Release memory for each Mat in outs
   }
-  
+
   // detectedhumans.insert({1, {10, 20, 30, 40}});
   return detectedhumans;
 }
@@ -40,7 +40,7 @@ std::unordered_map<int, std::vector<int>> HumanDetector::detectHuman(
 void HumanDetector::postProcess(cv::Mat& frame,
                                 const std::vector<cv::Mat>& outs,
                                 cv::dnn::Net& net,
-                                const std::vector<std::string>& classNames){
+                                const std::vector<std::string>& classNames) {
   std::vector<int> classIds;
   std::vector<float> confidences;
   std::vector<cv::Rect> boxes;
@@ -49,25 +49,22 @@ void HumanDetector::postProcess(cv::Mat& frame,
   float nmsThreshold = 0.4;
 
   for (size_t i = 0; i < outs.size(); ++i) {
-    float* data = (float*)outs[i].data;
+    float* data = reinterpret_cast<float*>(outs[i].data);
     for (int j = 0; j < outs[i].rows; ++j, data += outs[i].cols) {
       cv::Mat scores = outs[i].row(j).colRange(5, outs[i].cols);
       cv::Point classIdPoint;
       double confidence;
       minMaxLoc(scores, 0, &confidence, 0, &classIdPoint);
       if (confidence > confidenceThreshold) {
-        int centerX = (int)(data[0] * frame.cols);
-        int centerY = (int)(data[1] * frame.rows);
-        int width = (int)(data[2] * frame.cols);
-        int height = (int)(data[3] * frame.rows);
+        int centerX = static_cast<int>(data[0] * frame.cols);
+        int centerY = static_cast<int>(data[1] * frame.rows);
+        int width = static_cast<int>(data[2] * frame.cols);
+        int height = static_cast<int>(data[3] * frame.rows);
         int left = centerX - width / 2;
         int top = centerY - height / 2;
 
-        int originalWidth = frame.cols;
-        int originalHeight = frame.rows;
-
         classIds.push_back(classIdPoint.x);
-        confidences.push_back((float)confidence);
+        confidences.push_back(static_cast<float>(confidence));
         boxes.push_back(cv::Rect(left, top, width, height));
       }
       scores.release();
@@ -75,22 +72,23 @@ void HumanDetector::postProcess(cv::Mat& frame,
   }
 
   std::vector<int> indices;
-  cv::dnn::NMSBoxes(boxes, confidences, confidenceThreshold, nmsThreshold, indices);
+  cv::dnn::NMSBoxes(boxes, confidences, confidenceThreshold, nmsThreshold,
+                    indices);
 
   detectedhumans.clear();
   for (size_t i = 0; i < indices.size(); ++i) {
     int idx = indices[i];
     cv::Rect box = boxes[idx];
     std::string label = classNames[classIds[idx]];
-    label += std::to_string(i+1);
+    label += std::to_string(i + 1);
 
     // Check if the detected class is a "person" (classId is 0 for "person" in
     // COCO dataset)
     if (classIds[idx] == 0) {
       rectangle(frame, box, cv::Scalar(0, 255, 0),
                 3);  // Green rectangle for humans
-      putText(frame, label, cv::Point(box.x, box.y - 5), cv::FONT_HERSHEY_SIMPLEX, 1,
-              cv::Scalar(0, 255, 0), 2);
+      putText(frame, label, cv::Point(box.x, box.y - 5),
+              cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0), 2);
     }
     detectedhumans.insert({i, {box.x, box.y, box.width, box.height}});
   }
