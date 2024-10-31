@@ -48,6 +48,7 @@ target_link_libraries(depthmap PUBLIC
   depthmap
 )
 
+  target_compile_definitions(humandetector PUBLIC CONFIG_FILE_DIR="${PROJECT_SOURCE_DIR}/config") 
 
   target_include_directories(humanposeestimator PUBLIC
   # list of directories:

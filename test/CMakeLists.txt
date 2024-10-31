@@ -20,6 +20,8 @@ target_link_libraries(cpp-test PUBLIC
   humandetector
   humanposeestimator
   )
+  
+target_compile_definitions(cpp-test PUBLIC TEST_FILE_DIR="${PROJECT_SOURCE_DIR}/test") 
 
 # Enable CMake’s test runner to discover the tests included in the
 # binary, using the GoogleTest CMake module.

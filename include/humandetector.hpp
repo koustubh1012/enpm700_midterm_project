@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2024
  *
  */
+#pragma once
 #include <fstream>
 #include <iostream>
 #include <opencv2/dnn.hpp>
@@ -29,9 +30,12 @@ class HumanDetector {
    * @param class_names_files
    */
   HumanDetector(
-      const std::string& model_config_file = "./config/yolov3-tiny.cfg",
-      const std::string& model_weight_file = "./config/yolov3-tiny.weights",
-      const std::string& class_names_files = "./config/coco.names") {
+      const std::string& model_config_file = std::string(CONFIG_FILE_DIR) +
+                                             "/yolov3-tiny.cfg",
+      const std::string& model_weight_file = std::string(CONFIG_FILE_DIR) +
+                                             "/yolov3-tiny.weights",
+      const std::string& class_names_files = std::string(CONFIG_FILE_DIR) +
+                                             "/coco.names") {
     modelConfiguration = model_config_file;
     modelWeights = model_weight_file;
     classNamesFile = class_names_files;
