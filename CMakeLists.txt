@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(scratch)
+project(Human_Detetction_and_Pose_Estimation)
 
 #
 # GoogleTest Setup
