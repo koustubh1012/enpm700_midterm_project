@@ -16,9 +16,9 @@ This project is essential for Acme Robotics, as it offers a vital safety and nav
 ![Shell App Output](./results/output_demo.gif)
 
 ## Authors 
-1) [Keyur Borad](https://github.com/keyurborad5) 
-2) [FNU Koustubh](https://github.com/koustubh1012) 
-3) [Swaraj Mundruppady Rao](https://github.com/SwarajMundruppadyRao)
+1) [Keyur Borad](https://github.com/keyurborad5)                     : Graduate Student, UMD
+2) [FNU Koustubh](https://github.com/koustubh1012)                   : Graduate Student, UMD
+3) [Swaraj Mundruppady Rao](https://github.com/SwarajMundruppadyRao) : Graduate Student, UMD
 
 
 
@@ -27,6 +27,9 @@ This project was developed using the Agile Development Process (AIP) with pair p
 
 The product, iteration backlog and Work Log is documented and can be found in the Google Sheet here: 
 [Product_Backlog](https://docs.google.com/spreadsheets/d/1fh9gBtK0hcLDP9B47O9Ribjl_y3yS_IEFFMDYh72blE/edit?gid=0#gid=0)
+
+The sprint planning notes can be found in the following document
+[Sprint_Planning_Notes](https://docs.google.com/document/d/1RY02FLco5-oCXIZKx6IaOrWCDU1aE-_EZPOuttu1IsA/edit?usp=sharing)
 
 The end of each phase is tagged to distinguish each sprint. Each phase of development is tagged to mark the completion of individual sprints, providing clear milestones and versioning throughout the project. UML and Activity Diagrams are available in the UML directory, offering detailed visual documentation of the system's architecture and workflows. A short video providing a brief explanation of the implementation and demo can be found below. 
 
@@ -83,12 +86,34 @@ Test Driven Development process was followed and the unit tests can be run by th
 
 ```
 
+### API Documentation 
+
+The HumanPoseEstimator class can be used to find the pose of a human with respect to the robot's frame.
+You can use the function poseEstimator() to do so, it will take a cv::Mat image frame and return a unordered
+map containing human ids as keys and a float vector containing x, y, z coordinates as values
+vector of length 3, containing the estimated x, y, z positions
+```cpp
+# Example image frame
+cv::Mat image = cv::imread("path_to_image.jpg");
+
+# initialise the object
+HumanPoseEstimator pose_estimator_obj;
+
+# Initialize the unordered map 
+std::unordered_map<int, std::vector<float>> human_poses;
+
+# get the pose of the human in the frame
+human_poses = pose_estimator_obj.poseEstimator(frame);
+```
 ## Known Issues / bugs
-The human detection might fluctuate under situtaions like low lighting conditions 
+The human detection might fluctuate under situations like low lighting conditions 
+
+The unit test using the ctest command does not work as it doesn't recognize that config file paths while compiling.
+
+The code coverage is not properly generated due to the same issue of not recognizing the file path.
     
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Disclaimer
 This software is provided "as is," without any warranties or conditions, express or implied. By using this software, you acknowledge that Acme Robotics is not liable for any damages or issues arising from its use. Users are responsible for ensuring the software’s suitability and safety for their specific applications, especially in environments with humans.
-
