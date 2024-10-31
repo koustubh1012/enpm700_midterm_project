@@ -13,7 +13,7 @@ The system is designed to detect humans in real-time, estimate their poses, and 
 This project is essential for Acme Robotics, as it offers a vital safety and navigation component, allowing robots to operate autonomously in human-occupied environments. This capability is particularly beneficial in settings like warehouses, healthcare, and service industries, where collision avoidance is paramount.
 
 
-    (! Include results here)
+![Shell App Output](./results/output_demo.gif)
 
 ## Authors 
 1) [Keyur Borad](https://github.com/keyurborad5) 
