@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2024
  *
  */
+#pragma once
 #include <fstream>
 #include <iostream>
 #include <opencv2/dnn.hpp>
